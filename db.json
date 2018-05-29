@@ -1,0 +1,10 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "Pierwszy artykuł",
+      "content":  "Mój pierwszy artykuł",
+      "Image_url":"https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&h=350"
+    }
+  ]
+}
