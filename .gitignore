@@ -12,8 +12,7 @@ lib-cov
 pids
 results
 certs
-
-test-ui/cookie.txt
+db.json
 
 .next
 node_modules

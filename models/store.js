@@ -9,8 +9,6 @@ export const store = new DataStore();
 
 store.registerAdapter('http', adapter, { default: true });
 
-store.defineMapper('articles', {
+store.defineMapper('article', {
   endpoint: 'articles'
-  // schema: schemas.comment,
-  // relations: relations.comment
 });

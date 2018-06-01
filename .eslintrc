@@ -12,6 +12,7 @@
     "import/no-unresolved": 0,
     "react/jsx-filename-extension": 0,
     "linebreak-style": 0,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "react/forbid-prop-types": 0
   }
 }
