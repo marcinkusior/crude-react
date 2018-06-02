@@ -3,7 +3,7 @@ import { object, func } from 'prop-types';
 
 import ArticleForm from './article_form';
 
-export default class Article extends Component {
+export default class ArticleCard extends Component {
   static propTypes = {
     article: object.isRequired,
     callback: func.isRequired

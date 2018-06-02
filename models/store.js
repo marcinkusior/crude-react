@@ -1,14 +1,12 @@
 import { DataStore } from 'js-data';
 import { HttpAdapter } from 'js-data-http';
 
-export const adapter = new HttpAdapter({
+const adapter = new HttpAdapter({
   basePath: 'http://localhost:3000'
 });
 
-export const store = new DataStore();
-
+const store = new DataStore();
 store.registerAdapter('http', adapter, { default: true });
+const Article = store.defineMapper('article', { endpoint: 'articles' });
 
-store.defineMapper('article', {
-  endpoint: 'articles'
-});
+export { store, Article };

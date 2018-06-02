@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { store } from '../models/store';
+import { Article } from '../models/store';
 
-import Article from '../components/article';
-import ArticleForm from '../components/article_form';
+import ArticleCard from '../components/article_card';
+import NewArticle from '../components/new_article';
+
 
 export default class Index extends Component {
   constructor(props, context) {
@@ -12,7 +13,6 @@ export default class Index extends Component {
 
   state = {
     articles: [],
-    newArticle: store.createRecord('article', { title: '', content: '', image_url: '' })
   }
 
   componentDidMount() {
@@ -20,43 +20,20 @@ export default class Index extends Component {
   }
 
   fetchArticles() {
-    store.findAll('article').then((articles) => {
+    Article.findAll().then((articles) => {
       this.setState({
         articles
       });
     });
   }
 
-  saveArticle(event) {
-    this.state.newArticle.save().then(() => {
-      this.fetchArticles();
-      const newArticle = store.createRecord('article', { title: '', content: '', image_url: '' });
-      this.setState({ newArticle });
-    });
-    event.preventDefault();
-  }
-
-  destroyArticle(article) {
-    article.destroy().then(this.fetchArticles);
-  }
-
-  changeHandler(event) {
-    const { newArticle } = this.state;
-    newArticle[event.target.name] = event.target.value;
-    this.setState({ newArticle });
-  }
-
   render() {
-    const saveArticle = this.saveArticle.bind(this);
-    const changeHandler = this.changeHandler.bind(this);
-
     const articles = this.state.articles.map(article =>
-      (<Article
+      (<ArticleCard
         key={article.id}
         article={article}
         callback={this.fetchArticles}
-      />)
-    );
+      />));
 
     return (
       <div>
@@ -64,11 +41,7 @@ export default class Index extends Component {
           { articles }
         </div>
         <br />
-        <ArticleForm
-          article={this.state.newArticle}
-          onSubmit={ saveArticle }
-          onChange={ changeHandler }
-        />
+        <NewArticle callback={this.fetchArticles} />
       </div>
     );
   }
