@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { object, func } from 'prop-types';
 
-import ArticleForm from './article_form';
+import ArticleForm from '../article_form/article_form';
+
+import './article_card.scss';
 
 export default class ArticleCard extends Component {
   static propTypes = {
@@ -45,30 +47,42 @@ export default class ArticleCard extends Component {
 
   render() {
     const { article } = this.props;
-
-    if (this.state.isEditing) {
-      return (
-        <div>
-          <ArticleForm
-            article={this.state.editedArticle}
-            onChange={this.onChange}
-            onSubmit={this.updateArticle}
-          />
-          <button onClick={this.toggleIsEditting}> Back </button>
-          <br />
-          <br />
-        </div>
-      );
-    }
+    const { isEditing } = this.state;
 
     return (
-      <div>
-        <div> title: { article.title } </div>
-        <div> content: { article.content } </div>
-        <button onClick={this.destroyArticle}> Destroy </button>
-        <button onClick={this.toggleIsEditting}> Edit </button>
-        <br />
-        <br />
+      <div className="article-card">
+        { isEditing ? (
+          <div>
+            <ArticleForm
+              article={this.state.editedArticle}
+              onChange={this.onChange}
+              onSubmit={this.updateArticle}
+            />
+            <button
+              className="article-card__back-button"
+              onClick={this.toggleIsEditting}>
+              <i className="fas fa-times" />
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              className="article-card__destroy-button"
+              onClick={this.destroyArticle}
+            >
+              <i className="fas fa-trash-alt fa-fw" />
+            </button>
+            <button
+              className="article-card__edit-button"
+              onClick={this.toggleIsEditting}
+            >
+              <i className="fas fa-pencil-alt fa-fw" />
+            </button>
+
+            <div className="article-card__title"> { article.title } </div>
+            <div className="article-card__content"> { article.content } </div>
+          </div>
+        )}
       </div>
     );
   }

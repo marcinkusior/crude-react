@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Article } from '../models/store';
 
-import ArticleCard from '../components/article_card';
-import NewArticle from '../components/new_article';
+import ArticleCard from '../components/article_card/article_card';
+import NewArticle from '../components/new_article/new_article';
 
+import '../scss/base.scss';
+import './index.scss';
 
 export default class Index extends Component {
   constructor(props, context) {
@@ -12,7 +14,7 @@ export default class Index extends Component {
   }
 
   state = {
-    articles: [],
+    articles: []
   }
 
   componentDidMount() {
@@ -21,9 +23,7 @@ export default class Index extends Component {
 
   fetchArticles() {
     Article.findAll().then((articles) => {
-      this.setState({
-        articles
-      });
+      this.setState({ articles });
     });
   }
 
@@ -36,11 +36,10 @@ export default class Index extends Component {
       />));
 
     return (
-      <div>
+      <div className="index-container">
         <div>
           { articles }
         </div>
-        <br />
         <NewArticle callback={this.fetchArticles} />
       </div>
     );
